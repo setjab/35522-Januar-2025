@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utgifter med ansvar 35522</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 600px;
+            height: 600px;  /* FAST HØYDE LAGT TIL */
+            margin: auto;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Utgifter med ansvar 35522</h2>
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const ctx = document.getElementById('myChart').getContext('2d');
+
+            const data = {
+                labels: [
+                    "Husleie kommunal utleier", "Husleie privat", "Livsopphold",
+                    "Medisinutgifter", "Reise-/bilutgifter", "Strøm", "Andre formål",
+                    "Barnehage", "Bilutgifter", "Boutgifter", "Briller",
+                    "Egenandel helseutgifter", "Etablering", "Husleierestanse",
+                    "Klær og sko", "Kvalifiseringsstønad", "Lån andre formål",
+                    "Midlertidig boutgift", "Nødhjelp", "Samvær barn", "SFO",
+                    "Strømrestanse", "Supplerende sosialhjelp", "Tannbehandling"
+                ],
+                datasets: [{
+                    data: [
+                        95643.53, 132846.00, 296081.24, 3574.40, 1820.00, 45771.40, 
+                        10035.00, 7024.00, 6700.00, 13184.00, 6949.00, 4197.00, 
+                        14912.00, 1158.00, 6500.00, 28126.00, 22500.00, 1750.00, 
+                        10347.00, 1347.00, 2060.00, 1187.61, 108007.00, 7417.00
+                    ],
+                    backgroundColor: [
+                        "#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#FF8C33", "#33FFF6",
+                        "#8D33FF", "#FF3333", "#33FFA1", "#A133FF", "#FFD433", "#33D4FF",
+                        "#9DFF33", "#FF336B", "#33FF9D", "#D433FF", "#FF5A33", "#3386FF",
+                        "#FF9133", "#7C33FF", "#FFD933", "#33B3FF", "#ACFF33", "#FF3374"
+                    ],
+                    borderColor: "#ffffff",
+                    borderWidth: 2
+                }]
+            };
+
+            const config = {
+                type: 'pie',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    let value = data.datasets[0].data[tooltipItem.dataIndex];
+                                    return data.labels[tooltipItem.dataIndex] + ": " + value.toLocaleString("no-NO") + " NOK";
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+        });
+    </script>
+
+</body>
+</html>
